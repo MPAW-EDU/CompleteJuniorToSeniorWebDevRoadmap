@@ -71,3 +71,8 @@
     - Code Analysis
     - Best Practices
     - Secret
+
+
+## You will take on the role of a Junior dev thrust into the role of a senior
+## dev and faced with many difficult tasks, as the senior dev of keiko corp leaves for
+## a new opportunity.
