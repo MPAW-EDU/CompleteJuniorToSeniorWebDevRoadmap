@@ -21,6 +21,15 @@
 
 # -----------------
 
+1. Critical Render Path
+    - DOM -> CSSOM -> Render Tree -> Layout -> Paint
+    - Improving each step:
+        1. Load all HTMl first.
+        2. Load CSS as soon as possible.
+        3. Load scripts as late as possible, it slows things down and can block rendering.
+        4. CSS Render Blocking, the size of the CSS affects the load speed. Make them lightweight
+            if possible.
+
 2. Network Performance:
     - Minimize Text in your code, esp. by removing white spaces,
         it reduces the file size and load times.
