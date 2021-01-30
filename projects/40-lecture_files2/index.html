@@ -1,0 +1,52 @@
+<!-- #1 Minimize all text -->
+<!-- #2 Minimize images -->
+<!-- #3 Media Queries -->
+<!-- #4 Minimize # of files -->
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Network Performance</title>
+  <!-- CSS -->
+  <link rel="stylesheet" type="text/css" href="./style.css">
+  <!-- <link rel="stylesheet" type="text/css" href="./style2.css"> -->
+
+  <!-- This doesn't work well, It's meant to conditionally load based on screen size, but it won't work correctly for me... -->
+  <link rel="stylesheet" type="text/css" href="./style3.css" media="only screen and (min-width:1500px)">
+
+</head>
+<body>
+  <h1>Helloooo</h1>
+
+  <!-- Large Image -->
+  <img src="./puppy.jpg" width="300px" height="200px">
+
+  <!-- javascript -->
+  <script type="text/javascript" src="./script.js"></script>
+
+
+  <!-- Allows you to postpone loading part of the page until the document and essentials have loaded. -->
+  <script type="text/javascript">
+  
+    const loadStyleSheet = src => {
+      if(document.createStylesheet){
+        document.createStylesheet(src)
+      } else {
+        const stylesheet = document.createElement('link');
+        stylesheet.href = src;
+        stylesheet.type = 'text/css';
+        stylesheet.rel = 'stylesheet';
+        document.getElementsByTagName('head')[0].appendChild(stylesheet)
+      }
+    }
+  
+    window.onload = function() {
+      console.log('window done!');
+      loadStyleSheet('./style2.css')
+    }
+
+  </script>
+
+</body>
+</html>
