@@ -34,6 +34,27 @@
     - Minimize Text in your code, esp. by removing white spaces,
         it reduces the file size and load times.
         - You can use WebPack to do this.
+        - Use [ window.onload = () => {} ] to generate files or style sheets
+            and it shouble help to optimize the loading.
+            - <script tpye="text/javascript">
+                const loadStyleSheet = src = > {
+                    if(document.createStyleSheet) {
+                        document.createStyleSheet()
+                    } else {
+                        const stylesheet = document.createElement('link');
+                        stylesheet.href = src;
+                        stylesheet.type = 'text/css';
+                        stylesheet.rel = '_stylesheet';
+                        document.getElementsByTagNames('head)[0].appendChild(stylesheet)
+                    }
+                } 
+
+                window.onload = function() {
+                    console.log('window done!');
+                    loadStyleSheet('./style2.css)
+                }
+
+              </script>
 
     - Minimize Images to fit the display size, 
         smaller screen = smaller images,
