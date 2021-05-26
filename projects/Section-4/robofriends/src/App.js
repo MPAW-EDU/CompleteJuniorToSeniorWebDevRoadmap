@@ -1,25 +1,34 @@
-import logo from './logo.svg';
 import './App.css';
-import 
+import axios from 'axios';
+import {useState, useEffect } from 'react';
+import Card from './components/Card';
+
 
 // This is test text to update the commit 
-function App() {
+const App = () => {
+  const [robots, setRobots] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get('http://jsonplaceholder.typicode.com/users')
+      .then(res => setRobots(res.data))
+  },[])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1 className="f1">AlienFriends</h1>
+      {
+        robots.map((robot,idx) => {
+          return (
+            <Card 
+              name={robot.name} 
+              username={robot.username} 
+              email={robot.email} 
+              id={idx}
+            />
+          )
+        })
+      }
     </div>
   );
 }
