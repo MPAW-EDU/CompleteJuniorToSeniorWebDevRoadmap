@@ -26,11 +26,14 @@ const App = () => {
   },[])
 
   return (
-    <div className="tc">
-      <h1 className="f1">AlienFriends</h1>
-      <SearchBox onSearchChange={onSearchChange}/>
-      <CardList robots={filterBots}/>
-    </div>
+    
+    robots.length?
+      <div className="tc">
+        <h1 className="f1">AlienFriends</h1>
+        <SearchBox onSearchChange={onSearchChange}/>
+        <CardList robots={filterBots}/>
+      </div>
+      :<div className="f2 tc pa7 ma7 white">Loading...</div>
   );
 }
 
