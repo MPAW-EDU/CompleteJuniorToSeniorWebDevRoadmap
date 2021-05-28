@@ -1,8 +1,9 @@
 
 import {useEffect,useState} from 'react';
 import './App.css';
-import CardList from './components/CardList';
-import SearchBox from './components/SearchBox';
+import CardList from '../components/CardList';
+import SearchBox from '../components/SearchBox';
+import Scroll from '../components/Scroll';
 import axios from 'axios';
 
 
@@ -31,7 +32,9 @@ const App = () => {
       <div className="tc">
         <h1 className="f1">AlienFriends</h1>
         <SearchBox onSearchChange={onSearchChange}/>
-        <CardList robots={filterBots}/>
+        <Scroll>
+          <CardList robots={filterBots}/>
+        </Scroll>
       </div>
       :<div className="f2 tc pa7 ma7 white">Loading...</div>
   );
