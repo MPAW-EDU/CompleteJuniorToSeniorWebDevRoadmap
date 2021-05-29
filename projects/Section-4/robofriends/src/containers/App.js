@@ -1,35 +1,30 @@
 
-import {useEffect,useState} from 'react';
+import {useEffect} from 'react';
+import { connect } from 'react-redux';
 import './App.css';
 import CardList from '../components/CardList';
 import SearchBox from '../components/SearchBox';
 import Scroll from '../components/Scroll';
 import ErrorBoundary from '../components/ErrorBoundary';
-import axios from 'axios';
+import { requestAliens, setSearchField } from '../redux/actions';
 
 
 // This is test text to update the commit 
-const App = () => {
-  const [robots, setRobots] = useState([]);
-  const [searchField, setSearchField] = useState('');
-  const filterBots = robots.filter(robot => {
-    return robot.name.toLowerCase().includes(searchField.toLowerCase())
+const App = (props) => {
+  const filterBots = props.aliens.filter(robot => {
+    return robot.name.toLowerCase().includes(props.searchField.toLowerCase())
   })
   const onSearchChange = (event) => {
     setSearchField(event.target.value)
   }
 
   useEffect(() => {
-    axios
-      .get('http://jsonplaceholder.typicode.com/users')
-      .then(res => {
-        setRobots(res.data)
-      })
+    props.onRequestAliens()
   },[])
 
   return (
     
-    robots.length?
+    props.aliens.length?
       <div className="tc">
         <h1 className="f1">AlienFriends</h1>
         <SearchBox onSearchChange={onSearchChange}/>
@@ -43,4 +38,20 @@ const App = () => {
   );
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    searchField: state.searchAliens.searchField,
+    aliens: state.requestAliens.aliens,
+    isPending: state.requestAliens.isPending,
+    error: state.requestAliens.error
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onSearchChange: (event) => dispatch(setSearchField(event.target.value)),
+    onRequestAliens: () => dispatch(requestAliens())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

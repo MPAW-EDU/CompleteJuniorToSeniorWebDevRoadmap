@@ -8,11 +8,12 @@ import './index.css';
 import App from './containers/App';
 import reportWebVitals from './reportWebVitals';
 import 'tachyons';
-import { searchAliens } from './redux/reducers';
+import { searchAliens, requestAliens } from './redux/reducers';
 
 const logger = createLogger();
 const rootReducer = combineReducers({
-  searchRobots: searchAliens
+  searchAliens: searchAliens,
+  requestAliens: requestAliens
 })
 const STORE = createStore(
     rootReducer,
