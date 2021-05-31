@@ -14,20 +14,16 @@ const App = (props) => {
   const filterBots = props.aliens.filter(robot => {
     return robot.name.toLowerCase().includes(props.searchField.toLowerCase())
   })
-  const onSearchChange = (event) => {
-    setSearchField(event.target.value)
-  }
 
   useEffect(() => {
     props.onRequestAliens()
   },[])
 
-  return (
-    
+  return (  
     props.aliens.length?
       <div className="tc">
         <h1 className="f1">AlienFriends</h1>
-        <SearchBox onSearchChange={onSearchChange}/>
+        <SearchBox onSearchChange={props.onSearchChange}/>
         <Scroll>
           <ErrorBoundary>
             <CardList robots={filterBots}/>

@@ -32,7 +32,7 @@ export const requestAliens = (state=initialStateAliens, action={}) => {
             return Object.assign({}, state, { isPending: true})
 
         case REQUEST_ALIENS_SUCCESS:
-            return Object.assign({}, state, { robots: action.payload, isPending: false })
+            return Object.assign({}, state, { aliens: action.payload, isPending: false })
 
         case REQUEST_ALIENS_FAILED:
             return Object.assign({}, state, { error: action.payload, isPending: false })
