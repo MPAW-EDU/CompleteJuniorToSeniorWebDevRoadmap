@@ -2,6 +2,7 @@
 import {useEffect} from 'react';
 import { connect } from 'react-redux';
 import './App.css';
+import Header from '../components/Header';
 import CardList from '../components/CardList';
 import SearchBox from '../components/SearchBox';
 import Scroll from '../components/Scroll';
@@ -22,7 +23,7 @@ const App = (props) => {
   return (  
     props.aliens.length?
       <div className="tc">
-        <h1 className="f1">AlienFriends</h1>
+        <Header />
         <SearchBox onSearchChange={props.onSearchChange}/>
         <Scroll>
           <ErrorBoundary>
