@@ -16,6 +16,10 @@ const App = (props) => {
     return robot.name.toLowerCase().includes(props.searchField.toLowerCase())
   })
 
+  const { appServiceWorker } = props;
+  appServiceWorker.onInstalled(() => this.setState({ showInstalledMessage: true }))
+  appServiceWorker.onUpdateFound(() => this.setState({ showUpdateMessage: true }))
+
   useEffect(() => {
     props.onRequestAliens()
   },[])
