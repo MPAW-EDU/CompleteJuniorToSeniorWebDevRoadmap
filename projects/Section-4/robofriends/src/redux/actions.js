@@ -15,7 +15,7 @@ export const setSearchField = (text) => ({
 export const requestAliens = () => (dispatch) => {
     dispatch({type: REQUEST_ALIENS_PENDING});
     axios
-    .get("http://jsonplaceholder.typicode.com/users")
+    .get("https://jsonplaceholder.typicode.com/users")
     .then( data => dispatch({ type: REQUEST_ALIENS_SUCCESS, payload: data.data}) )
     .catch( err => dispatch({type: REQUEST_ALIENS_FAILED, payload: err}) )
 }

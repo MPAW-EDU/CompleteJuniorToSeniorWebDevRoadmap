@@ -5,10 +5,14 @@ import { Provider } from 'react-redux';
 import { createLogger } from 'redux-logger';
 import thunkMiddleware from 'redux-thunk';
 import './index.css';
-import App from './containers/App';
+import App from './containers/App.js';
 import reportWebVitals from './reportWebVitals';
 import 'tachyons';
 import { searchAliens, requestAliens } from './redux/reducers';
+
+import registerServiceWorker from 'react-service-worker';
+
+const appSW = registerServiceWorker();
 
 const logger = createLogger();
 const rootReducer = combineReducers({
@@ -25,7 +29,7 @@ const STORE = createStore(
 
 ReactDOM.render(
   <Provider store={STORE}>
-    <App />
+    <App appServiceWorker={appSW}/>
   </Provider>,
   document.getElementById('root')
 );
