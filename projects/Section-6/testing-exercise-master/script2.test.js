@@ -31,8 +31,11 @@ it('getPeople returns count and results', () => {
 
   expect.assertions(4)
   return swapi.getPeoplePromise(mockFetch).then(data => {
+    // The number of times it's been called, using a spy
     expect(mockFetch.mock.calls.length).toBe(1);
+    // Test what it was called with, URL in this case
     expect(mockFetch).toBeCalledWith('http://swapi.py4e.com/api/people');
+    // Check the count of the returning data
     expect(data.count).toEqual(87);
     expect(data.results.length).toBeGreaterThan(5);
   })
