@@ -21,7 +21,7 @@ ShallowWrapper {
       "children": undefined,
       "style": Object {
         "border": "5px solid black",
-        "height": "800px",
+        "height": "940px",
         "overflow": "scroll",
       },
     },
@@ -38,7 +38,7 @@ ShallowWrapper {
         "children": undefined,
         "style": Object {
           "border": "5px solid black",
-          "height": "800px",
+          "height": "940px",
           "overflow": "scroll",
         },
       },
