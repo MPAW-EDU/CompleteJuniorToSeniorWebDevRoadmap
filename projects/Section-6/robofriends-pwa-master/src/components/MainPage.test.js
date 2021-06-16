@@ -19,7 +19,7 @@ test('Renders MainPage without crashing',() => {
     expect(wrapper).toMatchSnapshot();
 })
 
-test('Filters robots correctly', () => {
+test('Filters robots correctly when no match', () => {
     const mockProps2 = {
         onRequestRobots: jest.fn(),
         robots: [{
@@ -33,6 +33,26 @@ test('Filters robots correctly', () => {
     const wrapper2 = shallow(<MainPage {...mockProps2} />)
 
     expect(wrapper2.instance().filterRobots([])).toEqual([])
+})
+
+test('Filters robots correctly and has a match', () => {
+    const mockProps2 = {
+        onRequestRobots: jest.fn(),
+        robots: [{
+            id: 3,
+            name: 'John',
+            email: 'johnny@email.com'
+        }],
+        searchField: 'john',
+        isPending: false
+    }
+    const wrapper3 = shallow(<MainPage {...mockProps2} />)
+
+    expect(wrapper3.instance().filterRobots([])).toEqual([{
+        id: 3,
+        name: 'John',
+        email: 'johnny@email.com'
+    }])
 })
 
 // redux-mock-store
