@@ -48,9 +48,30 @@ var fightRobotArmy = function (robots) {
     console.log('FIGHT!');
 };
 // Using a question mark asserts that it may or may not be part of an instantiation of the object.
-var fightAlienArmy = function (alien) {
+var fightAlienArmy2 = function (alien) {
     console.log('MMMGRRRGGLLE!!');
 };
-fightAlienArmy({ count: 1, type: 'Hydra' });
+fightAlienArmy2({ count: 1, type: 'Hydra' });
 var Alien = {};
 Alien.count;
+// Function
+var fightAlienArmy3 = function (aliens) {
+    console.log('ALIEN FIGHT 3!');
+};
+var fightRobotArmy4 = function (robots) {
+    console.log('ALIEN FIGHT 4!');
+    return 5;
+};
+// Classes
+var Animal = /** @class */ (function () {
+    function Animal(sound) {
+        this.sing = 'LaLaLaLaLALA';
+        this.sing = sound;
+    }
+    Animal.prototype.greet = function () {
+        return "Hello " + this.sing;
+    };
+    return Animal;
+}());
+var Lion = new Animal("Rooaaar!");
+Lion.greet();
