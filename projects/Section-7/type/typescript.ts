@@ -70,12 +70,38 @@ interface AlienArmy {
     magic?: string
 }
 // Using a question mark asserts that it may or may not be part of an instantiation of the object.
-let fightAlienArmy = (alien: AlienArmy) => {
+let fightAlienArmy2 = (alien: AlienArmy) => {
     console.log('MMMGRRRGGLLE!!');
     
 }
 
-fightAlienArmy({count: 1, type: 'Hydra'})
+fightAlienArmy2({count: 1, type: 'Hydra'})
 
 let Alien = {} as AlienArmy
 Alien.count
+
+// Function
+let fightAlienArmy3 = ( aliens: AlienArmy ): void => {
+    console.log('ALIEN FIGHT 3!');
+}
+
+let fightRobotArmy4 = (robots: {count: number, type: string, magic: string}): number => {
+    console.log('ALIEN FIGHT 4!');
+    return 5;
+} 
+
+// Classes
+class Animal {
+    private sing: string = 'LaLaLaLaLALA'
+    constructor(sound: string){
+        this.sing = sound;
+    }
+
+    greet(){
+        return `Hello ${this.sing}`;
+    }
+}
+
+let Lion = new Animal("Rooaaar!")
+
+Lion.greet()
