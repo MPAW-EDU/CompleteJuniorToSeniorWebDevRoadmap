@@ -105,3 +105,7 @@ class Animal {
 let Lion = new Animal("Rooaaar!")
 
 Lion.greet()
+
+
+// Union Type
+let confused: string | number | boolean = "Hello"
