@@ -1,4 +1,4 @@
-{ 
+{
   "compilerOptions": {
     "outDir": "build/dist",
     "module": "esnext",
@@ -27,3 +27,4 @@
     "src/setupTests.ts"
   ]
 }
+

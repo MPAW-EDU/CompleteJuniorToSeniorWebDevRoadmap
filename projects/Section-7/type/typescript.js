@@ -75,3 +75,5 @@ var Animal = /** @class */ (function () {
 }());
 var Lion = new Animal("Rooaaar!");
 Lion.greet();
+// Union Type
+var confused = "Hello";

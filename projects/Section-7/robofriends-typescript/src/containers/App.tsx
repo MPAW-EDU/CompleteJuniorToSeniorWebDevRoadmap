@@ -19,7 +19,7 @@ interface IAppState {
 }
 
 class App extends React.Component<IAppProps, IAppState> {
-  constructor(props) {
+  constructor(props: IAppProps) {
     super(props)
     this.state = {
       robots: [],
@@ -33,7 +33,7 @@ class App extends React.Component<IAppProps, IAppState> {
       .then(users => {this.setState({ robots: users})});
   }
 
-  onSearchChange = (event) => {
+  onSearchChange = (event: React.SyntheticEvent<HTMLInputElement>): void => {
     this.setState({ searchfield: event.currentTarget.value })
   }
 
