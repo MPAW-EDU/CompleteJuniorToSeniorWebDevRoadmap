@@ -1,5 +1,7 @@
 import Link from 'next/link';
 import Image from '../components/image';
+
+
 const Index = () => {
     return (
         <div style={{fontSize: '20px'}}>
