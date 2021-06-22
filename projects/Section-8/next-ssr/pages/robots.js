@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import fetch from 'isomorphic-unfetch';
+import Store from './store';
 
 const Robots = ({robots}) => {
     return (
@@ -10,15 +11,17 @@ const Robots = ({robots}) => {
             </Link>
             <div>
                 <ul>
-                {
+                {/* {
                     robots.map(robot => {
                         return (
                             <li key={robot.id}>
-                                {robot.name}
+                                <Link href={`/robot/${robot.id}`}>
+                                    <a>{robot.name}</a>
+                                </Link>
                             </li>
                         )
                     })
-                }
+                } */}
                 </ul>
             </div>
         </div>
@@ -28,9 +31,7 @@ const Robots = ({robots}) => {
 Robots.getInitialProps = async function() {
     const res = await fetch('https://jsonplaceholder.typicode.com/users')
     const data = await res.json();
-    return {
-        robots: data
-    }
+    Store = data
 }
 
 export default Robots;
