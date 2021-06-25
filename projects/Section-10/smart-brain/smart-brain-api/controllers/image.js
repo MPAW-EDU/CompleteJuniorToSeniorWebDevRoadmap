@@ -1,8 +1,10 @@
+require('dotenv').config()
+
 const Clarifai = require('clarifai');
 
 //You must add your own API key here from Clarifai. 
 const app = new Clarifai.App({
- apiKey: 'YOUR API KEY HERE'
+ apiKey: process.env.API_KEY,
 });
 
 const handleApiCall = (req, res) => {
@@ -18,7 +20,8 @@ const handleApiCall = (req, res) => {
     // .predict('c0c0ac362b03416da06ab3fa36fb58e3', req.body.input)
     .predict(Clarifai.FACE_DETECT_MODEL, req.body.input)
     .then(data => {
-      res.json(data);
+      //console.log(data.outputs[0].data.regions)
+      res.json(data.outputs[0].data.regions);
     })
     .catch(err => res.status(400).json('unable to work with API'))
 }
