@@ -1,7 +1,7 @@
 import React from 'react'
 
 const Outline = ({boxes}) => {
-    console.log(`outline: ${boxes}`);
+    // console.log(`outline: ${boxes}`);
     return (
         <div>                  {
           boxes.map((box, idx) => {
