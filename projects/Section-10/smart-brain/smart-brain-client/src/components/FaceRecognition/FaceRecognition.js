@@ -3,7 +3,7 @@ import './FaceRecognition.css';
 import Outline from '../Outline/Outline';
 
 const FaceRecognition = ({ imageUrl, boxes }) => {
-  console.log(`FR-Component: ${boxes}`);
+  // console.log(`FR-Component: ${boxes}`);
   return (
     <div className='center ma'>
       <div className='absolute mt2'>
