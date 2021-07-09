@@ -29,7 +29,7 @@ const Profile = ({isProfileOpen, toggleModal, user}) => {
                             />
                             <label 
                                 className="mt2 fw6" 
-                                htmlFor="email-address"
+                                htmlFor="user-age"
                                 >Age:
                             </label>
                             <input
