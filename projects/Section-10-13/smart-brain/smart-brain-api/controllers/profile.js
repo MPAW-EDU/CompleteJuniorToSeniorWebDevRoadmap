@@ -18,16 +18,16 @@ const handleProfileUpdate = (req, res, db) => {
   const { name, age, pet } = req.body.formInput;
 
   db('users')
-    .where({id: id})
-    .update({ name: name })
-    .then(res => {
-      if(res) {
+    .where({ id })
+    .update({ name })
+    .then(resp => {
+      if(resp) {
         res.status(201).json("success")
       } else {
         res.status(400).json('Not found')
       }
     })
-    .catch(err => res.status(400)).json('Error while updating user data')
+    .catch(err => res.status(400).json('Error while updating user data'))
 }
 
 module.exports = {
