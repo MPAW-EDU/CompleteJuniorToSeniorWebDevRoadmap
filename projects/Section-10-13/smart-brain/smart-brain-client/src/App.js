@@ -54,8 +54,11 @@ class App extends Component {
       name: data.name,
       email: data.email,
       entries: data.entries,
-      joined: data.joined
+      joined: data.joined,
+      age: data.age,
+      pet: data.pet,
     }})
+    // console.log(this.state.user);
   }
 
   calculateFaceLocation = (data) => {
@@ -151,6 +154,7 @@ class App extends Component {
                 isProfileOpen={this.state.isProfileOpen} 
                 toggleModal={this.toggleModal} 
                 user={user}
+                loadUser={this.loadUser}
               />
             </Modal>
         }

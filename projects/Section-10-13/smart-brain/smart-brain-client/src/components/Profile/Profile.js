@@ -29,9 +29,22 @@ class Profile extends Component {
         }
     }
 
+    onProfileUpdate = ( data ) => {
+        fetch(`http://localhost:3000/profile/${this.props.user.id}`,{
+            method: 'post',
+            headers: {'content-type': 'application/json'},
+            body: JSON.stringify({ formInput: data })
+        })
+        .then(resp => {
+            this.props.toggleModal();
+            this.props.loadUser({...this.props.user, ...data});
+        }).catch(console.log())
+    }
+
     render(){
 
-        const { entries, joined } = this.props.user 
+        const { entries, joined } = this.props.user; 
+        const { name, age, pet } = this.state;
         // console.log(this.props.user.name);
 
         return (
@@ -87,7 +100,11 @@ class Profile extends Component {
                                 id="pet"
                                 />
                             <div className="mt4" style={{display: 'flex', justifyContent: 'space-evenly'}}>
-                                <button className="b pa2 grow pointer hover-white w-40 bg-light-blue b--black-20">Save</button>
+                                <button 
+                                    onClick={() => this.onProfileUpdate({ name, age, pet})}
+                                    className="b pa2 grow pointer hover-white w-40 bg-light-blue b--black-20"
+                                    >Save
+                                </button>
                                 <button onClick={this.props.toggleModal} className="b pa2 grow pointer hover-white w-40 bg-light-red b--black-20">Cancel</button>
                             </div>
                     </main>
