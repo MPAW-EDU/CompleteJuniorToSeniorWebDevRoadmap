@@ -1,6 +1,11 @@
 const jwt = require('jsonwebtoken');
+const redis = require('redis');
+
+// setup Redis:
+const redisClient = redis.createClient(process.env.REDIS_URI)
 
 const handleSignin = (db, bcrypt, req, res) => {
+  // console.log(req.body)
   const { email, password } = req.body;
   if (!email || !password) {
     return Promise.reject('Incorrect user or password');
@@ -21,8 +26,14 @@ const handleSignin = (db, bcrypt, req, res) => {
     .catch(err => Promise.reject('wrong credentials'))
 }
 
-const getAuthTokenId = () => {
-  console.log('Authorized');
+const getAuthTokenId = (req,res) => {
+  const { authorization } = req.headers;
+  return redisClient.get(authorization, (err, reply) => {
+    if ( err || !reply ) {
+      return res.status(400).json('Unauthorized');
+    }
+    return res.json({id: reply})
+  })
 }
 
 const signToken = (email) => {
@@ -30,24 +41,32 @@ const signToken = (email) => {
   return jwt.sign(jwtPayload, process.env.JWT_SECRET)
 }
 
+const setToken = (key, value) => {
+  return Promise.resolve(redisClient.set(key, value))
+}
+
 const createSessions = (user) => {
   // Create JWT token and return user data
   const { email, id } = user;
-  const token = signToken(email)
+  const token = signToken(email);
+  return setToken(token, id)
+    .then(() => { return { success: 'true', userId: id, token }})
+    .catch(console.log)
 }
 
 const signinAutherntication = ( db, bcrypt ) => ( req,res ) => {
+  // console.log(req.body)
   const { authorization } = req.headers;
   return authorization ? 
-        getAuthTokenId() : 
+        getAuthTokenId(req,res) : 
         handleSignin( db, bcrypt, req, res)
           .then(data => {
-            data.id && data.email ? createSessions(data) : Promise.reject('Unauthorized User', data)
+            return data.id && data.email ? createSessions(data) : Promise.reject('Unauthorized User', data)
           })
+          .then(session => res.json(session))
           .catch(err => res.status(400).json(err))
 }
 
 module.exports = {
-  handleSignin: handleSignin,
   signinAutherntication: signinAutherntication
 }
