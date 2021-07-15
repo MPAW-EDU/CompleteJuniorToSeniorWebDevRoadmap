@@ -95,26 +95,31 @@ class App extends Component {
   }
 
   calculateFaceLocation = (data) => {
-    const clarifaiFace = data;
-    // console.log(data)
-    const image = document.getElementById('inputimage');
-    const width = Number(image.width);
-    const height = Number(image.height);
-    const boxes = []
-    clarifaiFace.forEach(borders => {
-      // console.log(borders)
-      boxes.push({
-        leftCol: borders.region_info.bounding_box.left_col * width,
-        topRow: borders.region_info.bounding_box.top_row * height,
-        rightCol: width - (borders.region_info.bounding_box.right_col * width),
-        bottomRow: height - (borders.region_info.bounding_box.bottom_row * height)
+    if (data && data.outputs){
+      const clarifaiFace = data;
+      // console.log(data)
+      const image = document.getElementById('inputimage');
+      const width = Number(image.width);
+      const height = Number(image.height);
+      const boxes = []
+      clarifaiFace.forEach(borders => {
+        // console.log(borders)
+        boxes.push({
+          leftCol: borders.region_info.bounding_box.left_col * width,
+          topRow: borders.region_info.bounding_box.top_row * height,
+          rightCol: width - (borders.region_info.bounding_box.right_col * width),
+          bottomRow: height - (borders.region_info.bounding_box.bottom_row * height)
+        })
       })
-    })
-    return boxes
+      return boxes
+    }
+    return;
   }
 
-  displayFaceBox = (boxs) => {
-    this.setState({boxes: boxs});
+  displayFaceBox = (boxes) => {
+    if (boxes) {
+      this.setState({boxes: boxes});
+    }
   }
 
   onInputChange = (event) => {
@@ -125,7 +130,10 @@ class App extends Component {
     this.setState({imageUrl: this.state.input});
       fetch('http://localhost:3000/imageurl', {
         method: 'post',
-        headers: {'Content-Type': 'application/json'},
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': window.sessionStorage.getItem('token')
+        },
         body: JSON.stringify({
           input: this.state.input
         })
@@ -135,7 +143,10 @@ class App extends Component {
         if (response) {
           fetch('http://localhost:3000/image', {
             method: 'put',
-            headers: {'Content-Type': 'application/json'},
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': window.sessionStorage.getItem('token')
+            },
             body: JSON.stringify({
               id: this.state.user.id
             })
