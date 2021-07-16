@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+// Change to a diff version of bcrypt
 const bcrypt = require('bcrypt-nodejs');
 const cors = require('cors');
 const knex = require('knex');
