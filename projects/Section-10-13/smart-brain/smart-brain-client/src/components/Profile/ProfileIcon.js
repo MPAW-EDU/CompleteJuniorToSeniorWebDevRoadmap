@@ -20,6 +20,28 @@ class ProfileIcon extends Component {
         }))
     }
 
+    handleLogout = () => {
+        let token = window.sessionStorage.getItem('token');
+        if(token){
+            fetch('http://localhost:3000/logout', {
+                method: 'post',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': token 
+                }
+            })
+            .then(resp => {
+                console.log(resp.status)
+                if(resp.status === 200) {
+                    this.props.onRouteChange('signout');
+                    window.sessionStorage.removeItem('token');
+                    token = '';
+                }
+                console.log(`handleLogout: token - ${token}, window - ${window.sessionStorage.getItem('token')}`)
+            })
+        }
+    }
+
     render(){
         return (
             <div className="pa4 tc">
@@ -41,7 +63,7 @@ class ProfileIcon extends Component {
                         right
                         >
                         <DropdownItem onClick={() => this.props.toggleModal()}>View Profile</DropdownItem>
-                        <DropdownItem onClick={() => this.props.onRouteChange('signout')}>Sign Out</DropdownItem>
+                        <DropdownItem onClick={() => this.handleLogout()}>Sign Out</DropdownItem>
                     </DropdownMenu>
                 </Dropdown>
             </div>
