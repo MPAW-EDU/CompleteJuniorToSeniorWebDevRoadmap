@@ -1,0 +1,15 @@
+
+@font-face {
+  /* PWA, shows text first and then swaps it for formatted text */
+  font-display: swap;
+  font-family: 'SEGA LOGO FONT';
+  font-style: normal;
+  font-weight: normal;
+  src: local('SEGA LOGO FONT'), url('../SEGA.woff') format('woff');
+}
+
+h1 {
+  font-family: 'SEGA LOGO FONT';
+  color: rebeccapurple;
+  text-shadow: black 5px 5px 5px;
+}
