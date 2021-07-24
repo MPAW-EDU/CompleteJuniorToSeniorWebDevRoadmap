@@ -1,14 +1,13 @@
-import React from 'react'
+import React from 'react';
 
-const ErrorBoundary = (props) => {
+const ErrorBoundary = ({children}) => {
 
     try {
-        return props.children
+        return children
     }
-    catch {
-        return <h1>Something Went Wrong.</h1>
+    catch(err) {
+        return <h1>Oops, Something Went Wrong</h1>
     }
-  
 }
 
 export default ErrorBoundary
