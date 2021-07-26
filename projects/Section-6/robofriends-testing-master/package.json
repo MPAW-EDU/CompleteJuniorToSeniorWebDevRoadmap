@@ -2,7 +2,7 @@
   "name": "robofriends",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://aneagoie.github.io/robofriends-pwa",
+  "homepage": "",
   "jest": {
     "snapshotSerializers": [
       "enzyme-to-json/serializer"
@@ -31,7 +31,7 @@
     "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
   "browserslist": {
