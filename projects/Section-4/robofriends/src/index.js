@@ -1,13 +1,36 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { applyMiddleware, combineReducers, createStore } from 'redux';
+import { Provider } from 'react-redux';
+import { createLogger } from 'redux-logger';
+import thunkMiddleware from 'redux-thunk';
 import './index.css';
-import App from './App';
+import App from './containers/App.js';
 import reportWebVitals from './reportWebVitals';
+import 'tachyons';
+import { searchAliens, requestAliens } from './redux/reducers';
+
+import registerServiceWorker from 'react-service-worker';
+
+const appSW = registerServiceWorker();
+
+const logger = createLogger();
+const rootReducer = combineReducers({
+  searchAliens: searchAliens,
+  requestAliens: requestAliens
+})
+const STORE = createStore(
+    rootReducer,
+    applyMiddleware(
+      thunkMiddleware,
+      logger
+    )
+)
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <Provider store={STORE}>
+    <App appServiceWorker={appSW}/>
+  </Provider>,
   document.getElementById('root')
 );
 
